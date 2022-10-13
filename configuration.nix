@@ -103,7 +103,6 @@ in
     description = "Murph";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
       git
       vscode
       zsh

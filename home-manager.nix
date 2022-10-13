@@ -7,7 +7,23 @@ in
     (import "${home-manager}/nixos")
   ];
 
-  home-manager.users.mumu = {
-    programs.librewolf.enable = true;
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.mumu = { pkgs, ... }: {
+    programs.home-manager = {
+      enable = true;
+    };
+
+    home.stateVersion = "22.05";
+
+    imports = [ 
+      ./firefox.nix
+    ];
+  };
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
   };
 }
