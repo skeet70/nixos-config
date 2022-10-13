@@ -72,19 +72,6 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -116,7 +103,8 @@ in
     packages = with pkgs; [
       firefox
       git
-    #  thunderbird
+      vscode
+      zsh
     ];
   };
 
@@ -127,6 +115,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
+    bat
     alacritty
     sway
     dbus-sway-environment
@@ -147,6 +136,12 @@ in
   environment.etc = {
     "sway/config".source = ./sway.cfg;
   };
+
+  environment.variables = {
+    "EDITOR" = "vim";
+  };
+
+  environment.defaultPackages = [];
 
   services.dbus.enable = true;
   xdg.portal = {
