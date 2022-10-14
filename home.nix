@@ -51,9 +51,15 @@ in
       userName = "Murph Murphy";
       userEmail = "murph@clurictec.com";
       aliases = {
-        find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'";
-        show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'";
-        gone = ''! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D'';
+      #  find-merge = ''
+      #    !sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'
+      #  '';
+        show-merge = ''
+          !sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'
+        '';
+        gone = ''
+          ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
+        '';
       };
       extraConfig = {
         github.user = "skeet70";
@@ -69,7 +75,7 @@ in
 
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions [
+      extensions = with pkgs.vscode-extensions; [
         scala-lang.scala
         svelte.svelte-vscode
         redhat.vscode-yaml
@@ -204,22 +210,17 @@ in
       enableSyntaxHighlighting = true;
       enableAutosuggestions = true;
       enableCompletion = true;
-      enableVteIntegration =
-        if pkgs.stable.stdenvNoCC.isDarwin then false else true;
+      enableVteIntegration = true;
       history = {
         expireDuplicatesFirst = true;
         ignoreSpace = true;
         save = 10000; # save 10,000 lines of history
       };
-      historySubstringSearch.enable = true;
       oh-my-zsh = {
         enable = true;
         theme = "lambda";
       };
     };
-
-    # for zsh completions
-    environment.pathsToLink = [ "/share/zsh" ];
 
      # Rust-based terminal emulator
     programs.alacritty = {
