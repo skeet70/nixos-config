@@ -105,18 +105,11 @@
   security.pam.services.swaylock = {
     text = "auth include login";
   };
-
+fonts.enableDefaultFonts = true;
   fonts.fonts = with pkgs; [
-    font-awesome
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
     fira-code
     fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
+     font-awesome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
