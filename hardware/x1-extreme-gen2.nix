@@ -9,9 +9,13 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" "battery" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  environment.variables = {
+    VDPAU_DRIVER= lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
@@ -61,10 +65,17 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiIntel
+    libvdpau-va-gl
+    intel-media-driver
+  ];
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
   # compensate for thinkpad trackpoint name
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
+  hardware.trackpoint.enable = lib.mkDefault true;
+  hardware.trackpoint.emulateWheel = lib.mkDefault config.hardware.trackpoint.enable;
   # get discrete HDMI port to work
   hardware.bumblebee.connectDisplay = true;
   nixpkgs.overlays = [
@@ -78,7 +89,7 @@
   ];
 
   # may not do anything on wayland but good reference if needed
-  services.xserver = mkMerge [
+  services.xserver = lib.mkMerge [
     {
       # set the right DPI. xdpyinfo says the screen is 508x285 but it's actually 344x193
       monitorSection = ''
@@ -87,11 +98,12 @@
     }
 
     # to support intel-virtual-output when using Bumblebee
-    (mkIf config.hardware.bumblebee.enable {
+    (lib.mkIf config.hardware.bumblebee.enable {
       deviceSection = ''Option "VirtualHeads" "1"'';
       videoDrivers = [ "intel" ];
     })
   ];
 
   services.throttled.enable = lib.mkDefault true;
+  services.fstrim.enable = lib.mkDefault true;
 }
