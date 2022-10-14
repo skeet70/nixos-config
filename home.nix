@@ -32,7 +32,7 @@ in
         bars = [{
           fonts.size = 13.0;
           command = "waybar"; # You can change it if you want
-          position = "bottom";
+          position = "top";
         }];
         # Display device configuration
         output = {
@@ -97,6 +97,7 @@ in
     home.packages = with pkgs; [ 
       file
       htop
+      slack
       # sway deps
       bemenu
       grim

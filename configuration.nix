@@ -72,6 +72,7 @@
         xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
       ];
+      gtkUsePortal = true;
     };
   };
 
@@ -96,10 +97,9 @@
 
   environment.variables = {
     "EDITOR" = "vim";
+    "NIXOS_OZONE_WL" = "1"; # enable slack wayland native
   };
-
   environment.shells = with pkgs; [ zsh ];
-
   environment.defaultPackages = [];
 
   security.pam.services.swaylock = {
@@ -107,6 +107,7 @@
   };
 
   fonts.fonts = with pkgs; [
+    font-awesome
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
