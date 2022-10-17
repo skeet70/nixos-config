@@ -6,6 +6,7 @@
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       ublock-origin
       bitwarden
+      # once available, add kagi
     ];
 
     profiles = {

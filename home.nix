@@ -41,6 +41,16 @@ in
             scale = "2";
 	        };
 	      };
+        input = {
+            "4617:8961:Keyboardio_Model_01_Keyboard" = {
+              xkb_layout = "us";
+            };
+            "*" = {
+              xkb_layout = "us,us";
+              xkb_variant = "dvorak,";
+              xkb_options = "grp:caps_toggle";
+            };
+        };
       };
       # End of Sway-specific Configuration
     };
@@ -238,9 +248,7 @@ in
       compression = true;
       controlMaster = "auto";
       includes = [ "*.conf" ];
-      extraConfig = ''
-        AddKeysToAgent yes
-      '';
+      extraConfig = ''AddKeysToAgent yes'';
     };
 
 
@@ -261,6 +269,13 @@ in
       waybar
       # end sway deps
     ];
+
+    services.udiskie = {
+      enable = true;
+      automount = true;
+      tray = "always";
+      notify = true;
+    };
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
