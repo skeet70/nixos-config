@@ -51,15 +51,9 @@ in
       userName = "Murph Murphy";
       userEmail = "murph@clurictec.com";
       aliases = {
-      #  find-merge = ''
-      #    !sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'
-      #  '';
-        show-merge = ''
-          !sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'
-        '';
-        gone = ''
-          ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
-        '';
+        find-merge = ''!sh -c 'commit=$0 && branch=''${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2' '';
+        show-merge = ''!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge' '';
+        gone = ''! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == "[gone]" {print $1}' | xargs -r git branch -D'';
       };
       extraConfig = {
         github.user = "skeet70";
