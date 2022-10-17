@@ -245,6 +245,7 @@ in
 
 
     home.packages = with pkgs; [
+      bitwarden
       file
       htop
       ouch
