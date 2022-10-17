@@ -15,7 +15,7 @@ in
     };
     home.stateVersion = "22.05";
 
-    imports = [ 
+    imports = [
       ./firefox.nix
     ];
 
@@ -38,7 +38,7 @@ in
         output = {
           eDP-1 = {
             # Set HIDP scale (pixel integer scaling)
-            scale = "1"; # probably 2 once not in a VM
+            scale = "2";
 	        };
 	      };
       };
@@ -96,7 +96,7 @@ in
         brettm12345.nixfmt-vscode
         davidanson.vscode-markdownlint
         pkief.material-icon-theme
-        bbenoist.nix 
+        bbenoist.nix
       ];
 
       userSettings = {
@@ -250,7 +250,7 @@ in
     };
 
 
-    home.packages = with pkgs; [ 
+    home.packages = with pkgs; [
       file
       htop
       ouch
