@@ -23,11 +23,13 @@ in
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
-      # Sway-specific Configuration
       config = {
         terminal = "alacritty";
         menu = "bemenu-run";
         modifier="Mod4";
+        startup = [
+          { command = "${pkgs.autotiling}/bin/autotiling"; always = true; }
+        ];
         # Status bar(s)
         bars = [{
           fonts.size = 13.0;
@@ -57,7 +59,6 @@ in
             };
         };
       };
-      # End of Sway-specific Configuration
     };
 
     programs.git = {
@@ -257,6 +258,8 @@ in
     };
 
     home.packages = with pkgs; [
+      # autotiling-rs switch to this once it's in stable
+      autotiling
       bitwarden
       file
       htop
