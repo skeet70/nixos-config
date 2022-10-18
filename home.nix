@@ -9,7 +9,7 @@ in
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.users.mumu = { pkgs, ... }: {
+  home-manager.users.mumu = { pkgs, config, ... }: {
     programs.home-manager = {
       enable = true;
     };
@@ -39,7 +39,12 @@ in
           eDP-1 = {
             # Set HIDP scale (pixel integer scaling)
             scale = "2";
+            # laptop screen to the right of monitor, swap position values if that changes
+            position = "3840,0";
 	        };
+          HDMI-A-1 = {
+            position = "0,0";
+          };
 	      };
         input = {
             "4617:8961:Keyboardio_Model_01_Keyboard" = {
@@ -251,30 +256,63 @@ in
       extraConfig = ''AddKeysToAgent yes'';
     };
 
-
     home.packages = with pkgs; [
       bitwarden
       file
       htop
       ouch
-      slack
+      pavucontrol
+      ripcord
+      signal-desktop
       # sway deps
       bemenu
       grim
       slurp
       swaylock
-      swayidle
       wl-clipboard
       mako
       waybar
       # end sway deps
     ];
 
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
     services.udiskie = {
       enable = true;
       automount = true;
       tray = "always";
       notify = true;
+    };
+
+    services.swayidle = let
+      lockCommand = pkgs.swaylock + "/bin/swaylock -fF -c 000000";
+      swayMsgPath = config.wayland.windowManager.sway.package + /bin/swaymsg;
+    in {
+      enable = true;
+      events = [
+        { event = "before-sleep"; command = lockCommand; }
+        { event = "after-resume"; command = ''${swayMsgPath} "output * dpms on"'';  }
+        { event = "lock"; command = lockCommand;  }
+      ];
+      timeouts = [
+        {
+          timeout = 60 * 6;
+          command = "${swayMsgPath} \"output * dpms off\"";
+          resumeCommand = "${swayMsgPath} \"output * dpms on\"";
+        }
+        {
+          timeout = 60 * 10;
+          command = lockCommand;
+        }
+        {
+          timeout = 60 * 15;
+          command = "systemctl suspend";
+        }
+      ];
     };
   };
 

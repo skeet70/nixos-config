@@ -5,3 +5,9 @@ once applied run `sway` to start the gui. If in VM with no hardware, add `WLR_NO
 
 USB drives should mount automatically, but if they don't use `udiskctl (un)mount -b /dev/sdX`.
 Toggle between `dvorak` and `us` keyboard layouts with caps lock.
+
+Use `nmtui` to manager network stuff.
+
+## TODO
+
+- blueberry bluetooth?

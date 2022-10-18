@@ -85,6 +85,11 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  # settings to prevent `direnv` from being garbage collected
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
