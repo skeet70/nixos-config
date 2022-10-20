@@ -5,12 +5,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # Include home manager and userspace configuration
-      ./home.nix
-    ];
+  imports = [ ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

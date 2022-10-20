@@ -1,15 +1,6 @@
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
-in
-{
-  imports = [
-    # add home manager
-    (import "${home-manager}/nixos")
-  ];
+{ inputs, config, pkgs, ...}: {
+  programs.home-manager.enable = true;
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.mumu = { pkgs, config, ... }: {
     programs.home-manager = {
       enable = true;
     };
@@ -317,11 +308,4 @@ in
         }
       ];
     };
-  };
-
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
-  };
 }
