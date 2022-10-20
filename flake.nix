@@ -84,30 +84,30 @@
             }
           ];
         };
-      };
-      pwvm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          inherit (nixpkgsConfig) config;
-          overlays = with overlays; [ nur.overlay master stable unstable ];
+        pwvm = nixpkgs.lib.nixosSystem {
+          inherit system;
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            inherit (nixpkgsConfig) config;
+            overlays = with overlays; [ nur.overlay master stable unstable ];
+          };
+          specialArgs = {
+            inherit inputs username;
+          };
+          modules = [
+            ./modules/hardware/pwvm.nix
+            ./modules/nixos
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./modules/home-manager;
+              home-manager.extraSpecialArgs = {
+                inherit inputs username;
+              };
+            }
+          ];
         };
-        specialArgs = {
-          inherit inputs username;
-        };
-        modules = [
-          ./modules/hardware/pwvm.nix
-          ./modules/nixos
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./modules/home-manager;
-            home-manager.extraSpecialArgs = {
-              inherit inputs username;
-            };
-          }
-        ];
       };
     };
 }
