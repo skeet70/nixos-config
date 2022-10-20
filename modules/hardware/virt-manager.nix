@@ -13,6 +13,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  networking.hostName = "nixos"; # Define your hostname.
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/73b6b9ab-87ce-4ce4-992e-1e4bd6f6c125";
       fsType = "ext4";

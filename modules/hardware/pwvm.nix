@@ -13,6 +13,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  networking.hostName = "pwvm"; # Define your hostname.
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4929bf5e-3002-48a3-9c2a-0e6ca32c6489";
       fsType = "ext4";
