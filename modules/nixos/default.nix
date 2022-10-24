@@ -72,6 +72,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
   users.defaultUserShell = pkgs.zsh;
+  users.extraGroups.vboxusers.members = [ "mumu" ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -109,6 +110,8 @@ fonts.enableDefaultFonts = true;
   # List services that you want to enable:
   virtualisation.docker.rootless.enable = true;
   virtualisation.docker.rootless.setSocketVariable = true;
+  # enable virtualbox
+  virtualisation.virtualbox.host.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
