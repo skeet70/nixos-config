@@ -155,6 +155,7 @@ in
         "javascript.inlayHints.functionLikeReturnTypes.enabled" = true;
         "javascript.referencesCodeLens.enabled" = true;
         "javascript.suggest.completeFunctionCalls" = true;
+        "redhat.telemetry.enabled" = false;
 
         "editor.tokenColorCustomizations" = {
           "textMateRules" = [
@@ -265,6 +266,7 @@ in
       htop
       ouch
       pavucontrol
+      postman
       ripcord
       signal-desktop
       # sway deps

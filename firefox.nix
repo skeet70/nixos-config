@@ -7,6 +7,7 @@
       ublock-origin
       bitwarden
       # once available, add kagi
+      # once available, add zenhub
     ];
 
     profiles = {

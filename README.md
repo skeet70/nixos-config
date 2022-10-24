@@ -12,3 +12,4 @@ If you need full battery charge before taking the laptop to-go, run `sudo tlp fu
 ## TODO
 
 - blueberry bluetooth?
+- move Insomnia collections over
