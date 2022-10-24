@@ -8,10 +8,16 @@
     [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  networking.hostName = "nixos"; # Define your hostname.
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/73b6b9ab-87ce-4ce4-992e-1e4bd6f6c125";
