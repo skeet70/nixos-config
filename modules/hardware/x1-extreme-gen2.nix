@@ -17,7 +17,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  networking.hostName = "clintlaptop"; # Define your hostname.
+  networking.hostName = "murph-icl-gen2";
 
   environment.variables = {
     VDPAU_DRIVER= lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");

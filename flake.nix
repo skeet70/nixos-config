@@ -60,7 +60,7 @@
       };
     in {
       nixosConfigurations = {
-        clintlaptop = nixpkgs.lib.nixosSystem {
+        murph-icl-gen2 = nixpkgs.lib.nixosSystem {
           inherit system;
           pkgs = import nixpkgs {
             system = "x86_64-linux";
