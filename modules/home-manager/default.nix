@@ -51,6 +51,79 @@
       };
     };
 
+    programs.waybar = {
+      enable = true;
+      settings = {
+        mainBar = {
+          layer = "top";
+          modules-left = [ "sway/workspaces" "sway/mode" ];
+          modules-center = [ "sway/window" ];
+          modules-right = [ "pulseaudio" "bluetooth" "network" "cpu" "memory" "temperature" "sway/language" "battery" "clock" "tray" ];
+          "sway/mode".format = "<span style=\"italic\">{}</span>";
+          tray.spacing = 10;
+          clock = {
+            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            format-alt = "{:%a, %d. %b %H:%M}";
+          };
+          cpu = {
+            format = "{usage}% ";
+            tooltip = false;
+          };
+          memory.format = "{}% ";
+          temperature = {
+            critical-threshold = 80;
+            format = "{temperatureC}°C {icon}";
+            format-icons = ["" "" ""];
+          };
+          battery = {
+            states = {
+              good = 80;
+              warning = 30;
+              critical = 15;
+            };
+            format = "{capacity}% {icon}";
+            format-charging = "{capacity}% ";
+            format-plugged = "{capacity}% ";
+            format-alt = "{time} {icon}";
+            format-icons = ["" "" "" "" ""];
+          };
+          network = {
+            format-wifi = "{essid} ({signalStrength}%) ";
+            format-ethernet = "{ipaddr}/{cidr} ";
+            tooltip-format = "{ifname} via {gwaddr} ";
+            format-linked = "{ifname} (No IP) ";
+            format-disconnected = "Disconnected ⚠";
+            format-alt = "{ifname}: {ipaddr}/{cidr}";
+          };
+          pulseaudio = {
+            format = "{volume}% {icon} {format_source}";
+            format-bluetooth = "{volume}% {icon} {format_source}";
+            format-bluetooth-muted = " {icon} {format_source}";
+            format-muted = " {format_source}";
+            format-source = "{volume}% ";
+            format-source-muted = "";
+            format-icons = {
+              headphone = "";
+              hands-free = "";
+              headset = "";
+              phone = "";
+              portable = "";
+              car = "";
+              default = ["" "" ""];
+            };
+            on-click = "pavucontrol";
+	  };
+          bluetooth = {
+            format = "";
+            format-off = "!";
+            format-disabled = "!";
+            on-click = "blueberry";
+            tooltip-format = "{status}";
+          };
+        };
+      };
+    };
+
     programs.git = {
       enable = true;
       package = pkgs.gitAndTools.gitFull; # Install git wiith all the optional extras
@@ -252,6 +325,7 @@
       # autotiling-rs switch to this once it's in stable
       autotiling
       bitwarden
+      blueberry
       file
       htop
       ouch
@@ -266,7 +340,6 @@
       swaylock
       wl-clipboard
       mako
-      waybar
       # end sway deps
     ];
 

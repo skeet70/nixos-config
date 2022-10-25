@@ -84,6 +84,7 @@
   hardware.trackpoint.emulateWheel = lib.mkDefault config.hardware.trackpoint.enable;
   # get discrete HDMI port to work
   hardware.bumblebee.connectDisplay = true;
+  hardware.bluetooth.enable = true;
   nixpkgs.overlays = [
     (self: super: {
       bumblebee = super.bumblebee.override {
