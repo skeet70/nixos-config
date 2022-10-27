@@ -12,3 +12,4 @@ If you need full battery charge before taking the laptop to-go, run `sudo tlp fu
 ## TODO
 
 - move Insomnia collections over
+- move over rust build settings

@@ -76,6 +76,8 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 8d";
   # settings to prevent `direnv` from being garbage collected
   nix.extraOptions = ''
     keep-outputs = true

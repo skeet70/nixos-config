@@ -49,6 +49,9 @@
             };
         };
       };
+      extraConfig = ''
+        bindsym ${config.wayland.windowManager.sway.config.modifier}+Shift+x move workspace to output right
+      '';
     };
 
     programs.waybar = {
@@ -203,6 +206,7 @@
         "vsintellicode.modify.editor.suggestSelection" =
           "automaticallyOverrodeDefaultValue";
         "java.semanticHighlighting.enabled" = true;
+        "keyboard.dispatch" = "keyCode";
         "workbench.editor.showTabs" = true;
         "workbench.list.automaticKeyboardNavigation" = false;
         "workbench.activityBar.visible" = false;
