@@ -13,7 +13,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
-    #ironhide.url = "git+ssh://git@github.com/IronCoreLabs/ironhide-rs?ref=main";
+    ironhide.url = "github:IronCoreLabs/ironhide";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-stable, nixpkgs-unstable
@@ -53,8 +53,7 @@
             inherit (nixpkgsConfig) config;
           } // {
             #nur = inputs.nur.overlay;
-            #ironhide =
-              #inputs.ironhide.packages.${prev.stdenv.system}.ironhide-rs;
+            ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
           };
         };
       };

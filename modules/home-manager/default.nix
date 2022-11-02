@@ -332,6 +332,7 @@
       blueberry
       file
       htop
+      unstable.ironhide
       ouch
       pavucontrol
       postman
