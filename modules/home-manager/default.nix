@@ -58,7 +58,7 @@
       enable = true;
       settings = {
         mainBar = {
-          layer = "top";
+          layer = "bottom";
           modules-left = [ "sway/workspaces" "sway/mode" ];
           modules-center = [ "sway/window" ];
           modules-right = [ "pulseaudio" "bluetooth" "network" "cpu" "memory" "temperature" "sway/language" "battery" "clock" "tray" ];
