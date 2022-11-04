@@ -15,7 +15,7 @@
       wrapperFeatures.gtk = true;
       config = {
         terminal = "alacritty";
-        menu = "bemenu-run";
+        menu = "bemenu-run --no-overlap";
         modifier="Mod4";
         startup = [
           { command = "${pkgs.autotiling}/bin/autotiling"; always = true; }
