@@ -82,18 +82,20 @@
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
   hardware.trackpoint.enable = lib.mkDefault true;
   hardware.trackpoint.emulateWheel = lib.mkDefault config.hardware.trackpoint.enable;
-  # get discrete HDMI port to work
-  hardware.bumblebee.connectDisplay = true;
+  # get discrete HDMI port to work, attempt nvidia drivers
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    prime = {
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
+      offload.enable = true;
+    };
+    powerManagement.enable = true;
+  };
+  hardware.opengl.enable = true;
+
   hardware.bluetooth.enable = true;
-  nixpkgs.overlays = [
-    (self: super: {
-      bumblebee = super.bumblebee.override {
-        extraNvidiaDeviceOptions = ''
-          Option "AllowEmptyInitialConfiguration"
-        '';
-      };
-    })
-  ];
 
   # may not do anything on wayland but good reference if needed
   services.xserver = lib.mkMerge [
@@ -102,13 +104,10 @@
       monitorSection = ''
         DisplaySize 344 193
       '';
-    }
 
-    # to support intel-virtual-output when using Bumblebee
-    (lib.mkIf config.hardware.bumblebee.enable {
-      deviceSection = ''Option "VirtualHeads" "1"'';
-      videoDrivers = [ "intel" ];
-    })
+      # try nvidia drivers
+      videoDrivers = [ "modesetting" "nvidia" ];
+    }
   ];
 
   services.throttled.enable = lib.mkDefault true;

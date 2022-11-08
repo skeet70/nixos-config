@@ -52,6 +52,9 @@
       extraConfig = ''
         bindsym ${config.wayland.windowManager.sway.config.modifier}+Shift+x move workspace to output right
       '';
+      extraSessionCommands = ''
+        export WLR_NO_HARDWARE_CURSORS=1
+      '';
     };
 
     programs.waybar = {
@@ -214,6 +217,8 @@
         "workbench.iconTheme" = "material-icon-theme";
         "editor.accessibilitySupport" = "off";
         "oneDark.bold" = true;
+        # disable the notifications about updates, we'll get them whenever nix gives them
+        "update.mode" = "none";
         "window.zoomLevel" = 1;
         "window.menuBarVisibility" = "toggle";
         "terminal.integrated.shell.linux" = "${pkgs.zsh}/bin/zsh";
