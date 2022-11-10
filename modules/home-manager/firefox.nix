@@ -50,6 +50,9 @@
           "extensions.pocket.oAuthConsumerKey" = "";
           "extensions.pocket.showHome" = false;
           "extensions.pocket.site" = "";
+          # force webgl on
+          "webgl.force-enabled" = true;
+          "gfx.webrender.enabled" = true;
         };
       };
     };

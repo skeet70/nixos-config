@@ -97,16 +97,16 @@
     "NIXOS_OZONE_WL" = "1"; # enable slack wayland native
   };
   environment.shells = with pkgs; [ zsh ];
-  environment.defaultPackages = [];
+  environment.defaultPackages = [ ];
 
   security.pam.services.swaylock = {
     text = "auth include login";
   };
-fonts.enableDefaultFonts = true;
+  fonts.enableDefaultFonts = true;
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
-     font-awesome
+    font-awesome
   ];
 
   # List services that you want to enable:

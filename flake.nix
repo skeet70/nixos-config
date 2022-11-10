@@ -16,8 +16,15 @@
     ironhide.url = "github:IronCoreLabs/ironhide";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, nixpkgs-unstable
-    , home-manager, nur, ... }:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , nixpkgs-stable
+    , nixpkgs-unstable
+    , home-manager
+    , nur
+    , ...
+    }:
     let
       username = "mumu";
       system = "x86_64-linux";
@@ -48,16 +55,19 @@
           };
         };
         unstable = _: prev: {
-          unstable = import nixpkgs-unstable {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          } // {
+          unstable = import nixpkgs-unstable
+            {
+              inherit (prev.stdenv) system;
+              inherit (nixpkgsConfig) config;
+            } // {
             #nur = inputs.nur.overlay;
             ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
+            discordo = prev.callPackage ./modules/home-manager/discordo.nix { };
           };
         };
       };
-    in {
+    in
+    {
       nixosConfigurations = {
         murph-icl-gen2 = nixpkgs.lib.nixosSystem {
           inherit system;

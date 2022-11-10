@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
   # Bootloader.
@@ -21,7 +22,8 @@
   networking.hostName = "pwvm"; # Define your hostname.
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4929bf5e-3002-48a3-9c2a-0e6ca32c6489";
+    {
+      device = "/dev/disk/by-uuid/4929bf5e-3002-48a3-9c2a-0e6ca32c6489";
       fsType = "ext4";
     };
 

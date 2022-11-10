@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   # Bootloader.
@@ -20,11 +21,12 @@
   networking.hostName = "murph-icl-gen2";
 
   environment.variables = {
-    VDPAU_DRIVER= lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
+    {
+      device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
       fsType = "btrfs";
       options = [ "subvol=root" "compress-force=zstd" "noatime" ];
     };
@@ -32,38 +34,42 @@
   boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/20ac52dd-b7ad-46a1-964f-2cd025dfb0e1";
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
+    {
+      device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
       fsType = "btrfs";
       options = [ "subvol=home" "compress-force=zstd" "noatime" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
+    {
+      device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
       fsType = "btrfs";
       options = [ "subvol=nix" "compress-force=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
+    {
+      device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
       fsType = "btrfs";
       options = [ "subvol=persist" "compress-force=zstd" "noatime" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
+    {
+      device = "/dev/disk/by-uuid/b7dcb30c-e8a8-4450-8297-c5b81975fa6f";
       fsType = "btrfs";
       options = [ "subvol=log" "compress-force=zstd" "noatime" ];
       neededForBoot = true;
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/17AE-3D77";
+    {
+      device = "/dev/disk/by-uuid/17AE-3D77";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/7aaeef47-7f4d-4095-bae3-f63aa98a7075"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/7aaeef47-7f4d-4095-bae3-f63aa98a7075"; }];
 
   networking.useDHCP = lib.mkDefault true;
   networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
@@ -114,19 +120,19 @@
   services.tlp = {
     enable = true;
     settings = {
-      CPU_SCALING_GOVERNOR_ON_BAT="powersave";
-      CPU_SCALING_GOVERNOR_ON_AC="performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
 
       # The following prevents the battery from charging fully to
       # preserve lifetime. Run `tlp fullcharge` to temporarily force
       # full charge.
       # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
-      START_CHARGE_THRESH_BAT0=40;
-      STOP_CHARGE_THRESH_BAT0=80;
+      START_CHARGE_THRESH_BAT0 = 40;
+      STOP_CHARGE_THRESH_BAT0 = 80;
 
       # 100 being the maximum, limit the speed of my CPU to reduce
       # heat and increase battery usage:
-      CPU_MAX_PERF_ON_BAT=60;
+      CPU_MAX_PERF_ON_BAT = 60;
     };
   };
   services.fstrim.enable = lib.mkDefault true;

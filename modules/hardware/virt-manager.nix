@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
   # Bootloader.
@@ -20,12 +21,14 @@
   networking.hostName = "nixos"; # Define your hostname.
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/73b6b9ab-87ce-4ce4-992e-1e4bd6f6c125";
+    {
+      device = "/dev/disk/by-uuid/73b6b9ab-87ce-4ce4-992e-1e4bd6f6c125";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/7125-C3D4";
+    {
+      device = "/dev/disk/by-uuid/7125-C3D4";
       fsType = "vfat";
     };
 
