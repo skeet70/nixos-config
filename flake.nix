@@ -62,7 +62,6 @@
             } // {
             #nur = inputs.nur.overlay;
             ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
-            discordo = prev.callPackage ./modules/home-manager/discordo.nix { };
           };
         };
       };

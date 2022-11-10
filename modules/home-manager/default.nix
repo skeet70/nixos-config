@@ -334,7 +334,6 @@
   };
 
   home.packages = with pkgs; [
-    unstable.discordo
     # autotiling-rs switch to this once it's in stable
     autotiling
     bitwarden
