@@ -149,6 +149,7 @@
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
       color.ui = true;
+      pull.rebase = true;
     };
   };
 
@@ -353,7 +354,6 @@
     slurp
     swaylock
     wl-clipboard
-    mako
     # end sway deps
   ];
 
@@ -368,6 +368,11 @@
     automount = true;
     tray = "always";
     notify = true;
+  };
+
+  programs.mako = {
+    enable = true;
+    defaultTimeout = 5000;
   };
 
   services.swayidle =

@@ -74,6 +74,8 @@
   networking.useDHCP = lib.mkDefault true;
   networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   networking.interfaces.wlp82s0.useDHCP = lib.mkDefault true;
+  # see https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

@@ -13,4 +13,4 @@ If you need full battery charge before taking the laptop to-go, run `sudo tlp fu
 
 - move Insomnia collections over
 - move over rust build settings
-- make a derivation for discordo
+- try https://github.com/uowuo/abaddon
