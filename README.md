@@ -7,6 +7,7 @@ USB drives should mount automatically, but if they don't use `udiskctl (un)mount
 Toggle between `dvorak` and `us` keyboard layouts with caps lock.
 
 Use `nmtui` to manager network stuff.
+Use `ncspot` for Spotify.
 If you need full battery charge before taking the laptop to-go, run `sudo tlp fullcharge`.
 
 ## TODO

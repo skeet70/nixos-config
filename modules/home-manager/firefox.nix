@@ -2,7 +2,7 @@
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = pkgs.firefox;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       ublock-origin
       bitwarden

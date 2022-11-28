@@ -348,6 +348,7 @@
     postman
     signal-desktop
     slack
+    ncspot
     # sway deps
     bemenu
     grim
