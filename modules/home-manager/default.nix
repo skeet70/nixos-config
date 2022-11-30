@@ -42,6 +42,10 @@
         "4617:8961:Keyboardio_Model_01_Keyboard" = {
           xkb_layout = "us";
         };
+        "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID" =
+          {
+            xkb_layout = "us";
+          };
         "*" = {
           xkb_layout = "us,us";
           xkb_variant = "dvorak,";
@@ -54,6 +58,7 @@
     '';
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
+      export WLR_RENDERER=vulkan
     '';
   };
 
@@ -355,6 +360,8 @@
     slurp
     swaylock
     wl-clipboard
+    # shouldn't be necessary once the most recent version of sway hits
+    vulkan-validation-layers
     # end sway deps
   ];
 
