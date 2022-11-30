@@ -18,7 +18,7 @@
       menu = "bemenu-run --no-overlap";
       modifier = "Mod4";
       startup = [
-        { command = "${pkgs.autotiling}/bin/autotiling"; always = true; }
+        { command = "${pkgs.autotiling}/bin/autotiling-rs"; always = true; }
       ];
       # Status bar(s)
       bars = [{
@@ -42,10 +42,6 @@
         "4617:8961:Keyboardio_Model_01_Keyboard" = {
           xkb_layout = "us";
         };
-        "4176:1031:Yubico_YubiKey_OTP+FIDO+CCID" =
-          {
-            xkb_layout = "us";
-          };
         "*" = {
           xkb_layout = "us,us";
           xkb_variant = "dvorak,";
@@ -340,8 +336,7 @@
   };
 
   home.packages = with pkgs; [
-    # autotiling-rs switch to this once it's in stable
-    autotiling
+    autotiling-rs
     bitwarden
     blueberry
     file
