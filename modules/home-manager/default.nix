@@ -18,7 +18,7 @@
       menu = "bemenu-run --no-overlap";
       modifier = "Mod4";
       startup = [
-        { command = "${pkgs.autotiling}/bin/autotiling-rs"; always = true; }
+        { command = "${pkgs.autotiling-rs}/bin/autotiling-rs"; always = true; }
       ];
       # Status bar(s)
       bars = [{
@@ -174,6 +174,7 @@
       naumovs.color-highlight
       mikestead.dotenv
       mskelton.one-dark-theme
+      ms-vsliveshare.vsliveshare
       brettm12345.nixfmt-vscode
       davidanson.vscode-markdownlint
       pkief.material-icon-theme

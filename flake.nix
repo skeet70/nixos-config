@@ -73,7 +73,13 @@
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             inherit (nixpkgsConfig) config;
-            overlays = with overlays; [ nur.overlay master stable unstable ];
+            overlays = with overlays; [
+              nur.overlay
+              master
+              stable
+              unstable
+              (import ./overlays)
+            ];
           };
           specialArgs = {
             inherit inputs username;

@@ -61,7 +61,6 @@
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
     ];
-    gtkUsePortal = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -77,6 +76,7 @@
   nixpkgs.config.allowUnfree = true;
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 8d";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # settings to prevent `direnv` from being garbage collected
   nix.extraOptions = ''
     keep-outputs = true
