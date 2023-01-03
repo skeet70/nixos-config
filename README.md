@@ -16,4 +16,4 @@ If you need full battery charge before taking the laptop to-go, run `sudo tlp fu
 - move over rust build settings
 - try https://github.com/uowuo/abaddon
 - try https://nixos.wiki/wiki/Yubikey for sudo and login
-- fix firefox issue (tracked [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1752717))
+- fix move workspace freeze
