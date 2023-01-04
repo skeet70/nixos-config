@@ -109,8 +109,10 @@
   ];
 
   # List services that you want to enable:
-  virtualisation.docker.rootless.enable = true;
-  virtualisation.docker.rootless.setSocketVariable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
   # enable virtualbox
   virtualisation.virtualbox.host.enable = true;
 

@@ -8,7 +8,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/master";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -19,7 +18,6 @@
   outputs =
     inputs@{ self
     , nixpkgs
-    , nixpkgs-stable
     , nixpkgs-unstable
     , home-manager
     , nur
@@ -48,12 +46,6 @@
             inherit (nixpkgsConfig) config;
           };
         };
-        stable = _: prev: {
-          stable = import nixpkgs-stable {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          };
-        };
         unstable = _: prev: {
           unstable = import nixpkgs-unstable
             {
@@ -76,9 +68,7 @@
             overlays = with overlays; [
               nur.overlay
               master
-              stable
               unstable
-              (import ./overlays)
             ];
           };
           specialArgs = {
@@ -103,7 +93,7 @@
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             inherit (nixpkgsConfig) config;
-            overlays = with overlays; [ nur.overlay master stable unstable ];
+            overlays = with overlays; [ nur.overlay master unstable ];
           };
           specialArgs = {
             inherit inputs username;
