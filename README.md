@@ -9,6 +9,7 @@ Toggle between `dvorak` and `us` keyboard layouts with caps lock.
 Use `nmtui` to manager network stuff.
 Use `ncspot` for Spotify.
 If you need full battery charge before taking the laptop to-go, run `sudo tlp fullcharge`.
+For now `systemctl --user start docker` to enable docker on a per-run basis. I had it `enable`d in systemctl, but an upgrade broke that when the symlink changed.
 
 ## TODO
 
@@ -17,3 +18,4 @@ If you need full battery charge before taking the laptop to-go, run `sudo tlp fu
 - try https://github.com/uowuo/abaddon
 - try https://nixos.wiki/wiki/Yubikey for sudo and login
 - fix move workspace freeze
+- get docker working with socket activation (or service enable from nixos config)

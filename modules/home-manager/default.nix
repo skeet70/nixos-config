@@ -179,6 +179,7 @@
       davidanson.vscode-markdownlint
       pkief.material-icon-theme
       bbenoist.nix
+      kennylong.kubernetes-yaml-formatter
     ];
 
     userSettings = {
