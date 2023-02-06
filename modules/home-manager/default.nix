@@ -179,7 +179,13 @@
       davidanson.vscode-markdownlint
       pkief.material-icon-theme
       bbenoist.nix
-      kennylong.kubernetes-yaml-formatter
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "kubernetes-yaml-formatter";
+        publisher = "kennylong";
+        version = "1.1.0";
+        sha256 = "bAdMQxefeqedBdLiYqFBbuSN0auKAs4SKnrqK9/m65c=";
+      }
     ];
 
     userSettings = {
