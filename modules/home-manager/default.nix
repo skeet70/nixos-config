@@ -137,8 +137,11 @@
     userName = "Murph Murphy";
     userEmail = "murph@clurictec.com";
     aliases = {
+      # find how a given commit made it into a given branch, ex `git find-merge 2f87703c main`
       find-merge = ''!sh -c 'commit=$0 && branch=''${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2' '';
+      # show the commit that brought a commit into the current branch, ex `git show-merge a7a040dcd7c2 sa-tagging-events`
       show-merge = ''!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge' '';
+      # remove branches that are no longer on the remote
       gone = ''! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == "[gone]" {print $1}' | xargs -r git branch -D'';
     };
     extraConfig = {

@@ -24,6 +24,8 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.avahi.enable = true;
+  services.avahi.openFirewall = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -74,14 +76,21 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 8d";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # settings to prevent `direnv` from being garbage collected
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
+  nix = {
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 8d";
+    };
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    # settings to prevent `direnv` from being garbage collected
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -3,16 +3,16 @@
   programs.firefox = {
     enable = true;
     package = pkgs.firefox;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      ublock-origin
-      bitwarden
-      # once available, add kagi
-      # once available, add zenhub
-    ];
 
     profiles = {
       default = {
         isDefault = true;
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          bitwarden
+          # once available, add kagi
+          # once available, add zenhub
+        ];
         settings = {
           # Enable HTTPS-Only Mode
           "dom.security.https_only_mode" = true;
