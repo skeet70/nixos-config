@@ -5,7 +5,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ];
+  imports = [
+    ./yubikey-gpg.nix
+  ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -110,6 +112,11 @@
   security.pam.services.swaylock = {
     text = "auth include login";
   };
+  # show asterisks, also fixes a bug requiring CTRL+D to get enter to work with password prompts and pamu2f enabled.
+  security.sudo.extraConfig = "
+          Defaults        env_reset,pwfeedback
+  ";
+
   fonts.enableDefaultFonts = true;
   fonts.fonts = with pkgs; [
     fira-code

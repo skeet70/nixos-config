@@ -16,6 +16,5 @@ For now `systemctl --user start docker` to enable docker on a per-run basis. I h
 - move Insomnia collections over
 - move over rust build settings
 - try https://github.com/uowuo/abaddon
-- try https://nixos.wiki/wiki/Yubikey for sudo and login
 - fix move workspace freeze
 - get docker working with socket activation (or service enable from nixos config)
