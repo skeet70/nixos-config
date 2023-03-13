@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }: {
 
   programs.home-manager = {
     enable = true;
@@ -40,6 +40,9 @@
       };
       input = {
         "4617:8961:Keyboardio_Model_01_Keyboard" = {
+          xkb_layout = "us";
+        };
+        "4617:8963:Keyboardio_Atreus_Keyboard" = {
           xkb_layout = "us";
         };
         "*" = {
@@ -206,7 +209,7 @@
       "editor.scrollbar.vertical" = "hidden";
       "editor.scrollBeyondLastLine" = false;
       "editor.cursorBlinking" = "solid";
-      "editor.minimap.enabled" = false;
+      "editor.minimap.enabled" = true;
       "[nix]"."editor.tabSize" = 2;
       "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
       "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -298,6 +301,28 @@
     };
   };
 
+  # VSCode whines like a ... I don't know, but a lot when the config file is read-only
+  # I want nix to govern the configs, but to let vscode edit it (ephemerally) if I change
+  # the zoom or whatever. This hack just copies the symlink to a normal file
+  home.activation.beforeCheckLinkTargets = {
+    after = [ ];
+    before = [ "checkLinkTargets" ];
+    data = ''
+      userDir=~/.config/Code/User
+      rm -rf $userDir/settings.json
+    '';
+  };
+  home.activation.afterWriteBoundary =
+    {
+      after = [ "writeBoundary" ];
+      before = [ ];
+      data = ''
+        userDir=~/.config/Code/User
+        rm -rf $userDir/settings.json
+        cat ${pkgs.writeText "tmp_vscode_settings" (builtins.toJSON config.programs.vscode.userSettings)} | jq --monochrome-output > $userDir/settings.json
+      '';
+    };
+
   programs.zsh = {
     enable = true;
     shellAliases = {
@@ -343,7 +368,14 @@
     compression = true;
     controlMaster = "auto";
     includes = [ "*.conf" ];
-    extraConfig = ''AddKeysToAgent yes'';
+    # matchBlocks."*" =
+    #   {
+    #     identityFile = "~/.ssh/yubikey.pub";
+    #     identitiesOnly = true;
+    #   };
+    extraConfig = ''
+      AddKeysToAgent yes
+    '';
   };
 
   home.packages = with pkgs; [
@@ -353,6 +385,7 @@
     file
     htop
     unstable.ironhide
+    jq # just for vscode temp writable hack
     nixpkgs-fmt
     ouch
     pavucontrol
@@ -384,7 +417,7 @@
     notify = true;
   };
 
-  programs.mako = {
+  services.mako = {
     enable = true;
     defaultTimeout = 5000;
   };
