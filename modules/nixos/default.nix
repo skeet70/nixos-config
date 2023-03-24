@@ -106,6 +106,7 @@
     "EDITOR" = "vim";
     "NIXOS_OZONE_WL" = "1"; # enable slack wayland native
   };
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
   environment.defaultPackages = [ ];
 

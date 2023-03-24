@@ -84,8 +84,6 @@
     libvdpau-va-gl
     intel-media-driver
   ];
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
   # compensate for thinkpad trackpoint name
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
   hardware.trackpoint.enable = lib.mkDefault true;
