@@ -171,7 +171,7 @@
       bungcip.better-toml
       esbenp.prettier-vscode
       timonwong.shellcheck
-      matklad.rust-analyzer
+      rust-lang.rust-analyzer
       graphql.vscode-graphql
       dbaeumer.vscode-eslint
       codezombiech.gitignore
@@ -381,6 +381,7 @@
   home.packages = with pkgs; [
     autotiling-rs
     bitwarden
+    bitwarden-cli
     blueberry
     file
     htop
@@ -392,7 +393,7 @@
     postman
     signal-desktop
     slack
-    ncspot
+    spotify-tui
     # sway deps
     bemenu
     grim
@@ -449,5 +450,17 @@
           command = "systemctl suspend";
         }
       ];
+    };
+
+    # used by spotify-tui to run a device locally that can be controlled
+    services.spotifyd = {
+      enable = true;
+      settings = {
+        global = {
+          username = "skeet70";
+          device_name = "work_nix";
+          password_cmd = "cat /home/mumu/.local/spotifyd_pass";
+        };
+      };
     };
 }

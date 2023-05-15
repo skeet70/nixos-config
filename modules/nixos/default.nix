@@ -110,6 +110,9 @@
   environment.shells = with pkgs; [ zsh ];
   environment.defaultPackages = [ ];
 
+  # enable dconf so gtk programs can manage their settings
+  programs.dconf.enable = true;
+
   security.pam.services.swaylock = {
     text = "auth include login";
   };
