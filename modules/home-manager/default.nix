@@ -179,12 +179,14 @@
       bradlc.vscode-tailwindcss
       naumovs.color-highlight
       mikestead.dotenv
+      mkhl.direnv
       mskelton.one-dark-theme
       ms-vsliveshare.vsliveshare
       brettm12345.nixfmt-vscode
       davidanson.vscode-markdownlint
       pkief.material-icon-theme
       bbenoist.nix
+      github.vscode-github-actions
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "kubernetes-yaml-formatter";
@@ -331,7 +333,7 @@
       unar = "ouch decompress";
       unzip = "ouch decompress";
     };
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
     enableVteIntegration = true;
@@ -393,7 +395,7 @@
     postman
     signal-desktop
     slack
-    spotify-tui
+    spotify-player
     # sway deps
     bemenu
     grim
@@ -450,17 +452,5 @@
           command = "systemctl suspend";
         }
       ];
-    };
-
-    # used by spotify-tui to run a device locally that can be controlled
-    services.spotifyd = {
-      enable = true;
-      settings = {
-        global = {
-          username = "skeet70";
-          device_name = "work_nix";
-          password_cmd = "cat /home/mumu/.local/spotifyd_pass";
-        };
-      };
     };
 }

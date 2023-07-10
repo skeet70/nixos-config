@@ -35,6 +35,8 @@
           experimental-features = "nix-command flakes";
           keep-derivations = true;
           keep-outputs = true;
+          # try removing this every once in a while to see if deps stopped using it
+          permittedInsecurePackages = [ "nodejs-16.20.0" ];
         };
       };
 
@@ -52,7 +54,6 @@
               inherit (prev.stdenv) system;
               inherit (nixpkgsConfig) config;
             } // {
-            #nur = inputs.nur.overlay;
             ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
           };
         };
