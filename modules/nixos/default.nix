@@ -120,9 +120,14 @@
   security.sudo.extraConfig = "
           Defaults        env_reset,pwfeedback
   ";
+  # Enable the ClamAV service and keep the database up to date
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+  };
 
-  fonts.enableDefaultFonts = true;
-  fonts.fonts = with pkgs; [
+  fonts.enableDefaultPackages = true;
+  fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
     font-awesome

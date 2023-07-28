@@ -168,7 +168,7 @@
       redhat.vscode-yaml
       jnoortheen.nix-ide
       vspacecode.whichkey # ?
-      bungcip.better-toml
+      tamasfe.even-better-toml
       esbenp.prettier-vscode
       timonwong.shellcheck
       rust-lang.rust-analyzer

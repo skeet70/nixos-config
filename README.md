@@ -11,11 +11,10 @@ Toggle between `dvorak` and `us` keyboard layouts with caps lock.
 - If you need full battery charge before taking the laptop to-go, run `sudo tlp fullcharge`.
 - For now `systemctl --user start docker` to enable docker on a per-run basis. I had it `enable`d in systemctl, but an upgrade broke that when the symlink changed.
 - `nix-shell -p kooha` for screen recording.
+- start `vscode` with `--ozone-platform=wayland` for now.
 
 ## TODO
 
-- move Insomnia collections over
-- move over rust build settings
 - try https://github.com/uowuo/abaddon
 - fix move workspace freeze
 - try moving from vscode to helix (once https://github.com/helix-editor/helix/pull/2507 and https://github.com/helix-editor/helix/pull/5768) are merged, or off the flake in the ts branch if you get impatient
