@@ -20,6 +20,8 @@
 
   # Set your time zone.
   time.timeZone = "America/Denver";
+  # needed in Paris @Mariott to get stable internet
+  # time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";

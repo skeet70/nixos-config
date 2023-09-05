@@ -77,6 +77,7 @@
           };
           modules = [
             ./modules/hardware/x1-extreme-gen2.nix
+            ./modules/hardware/drawingtablet.nix
             ./modules/nixos
             home-manager.nixosModules.home-manager
             {

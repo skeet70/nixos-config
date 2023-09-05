@@ -162,7 +162,10 @@
 
   programs.vscode = {
     enable = true;
+    enableExtensionUpdateCheck = false;
+    enableUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
+      charliermarsh.ruff
       scala-lang.scala
       svelte.svelte-vscode
       redhat.vscode-yaml
@@ -182,17 +185,35 @@
       mkhl.direnv
       mskelton.one-dark-theme
       ms-vsliveshare.vsliveshare
+      ms-python.python
       brettm12345.nixfmt-vscode
       davidanson.vscode-markdownlint
       pkief.material-icon-theme
       bbenoist.nix
-      github.vscode-github-actions
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "kubernetes-yaml-formatter";
         publisher = "kennylong";
         version = "1.1.0";
         sha256 = "bAdMQxefeqedBdLiYqFBbuSN0auKAs4SKnrqK9/m65c=";
+      }
+      {
+        name = "vscode-github-actions";
+        publisher = "github";
+        version = "0.25.8";
+        sha256 = "N9xW/RdVxsGQepnoR1SHRAL48/pk95qQ8I5xc8y3qB4=";
+      }
+      {
+        name = "black-formatter";
+        publisher = "ms-python";
+        version = "2023.5.12151008";
+        sha256 = "YBcyyE9Z2eL914J8I97WQW8a8A4Ue6C0pCUjWRRPcr8=";
+      }
+      {
+        name = "mypy-type-checker";
+        publisher = "ms-python";
+        version = "2023.2.0";
+        sha256 = "KIaXl7SBODzoJQM9Z1ZuIS5DgEKtv/CHDWJ8n8BAmtU=";
       }
     ];
 
@@ -216,6 +237,7 @@
       "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
       "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
       "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
+      "[python]"."editor.defaultFormatter" = "ms-python.black-formatter";
       "extensions.ignoreRecommendations" = false;
       "files.insertFinalNewline" = true;
       "[scala]"."editor.tabSize" = 2;
@@ -303,7 +325,7 @@
     };
   };
 
-  # VSCode whines like a ... I don't know, but a lot when the config file is read-only
+  # VSCode whines like a when the config file is read-only
   # I want nix to govern the configs, but to let vscode edit it (ephemerally) if I change
   # the zoom or whatever. This hack just copies the symlink to a normal file
   home.activation.beforeCheckLinkTargets = {
