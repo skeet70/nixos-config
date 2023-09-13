@@ -15,6 +15,8 @@
     ironhide.url = "github:IronCoreLabs/ironhide";
     # switch to main once flake merges
     matui.url = "github:skeet70/matui?rev=f30a91c4f5dc0546ce980c943449ee79e46035be";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -91,30 +93,23 @@
                 inherit inputs username;
               };
             }
-          ];
-        };
-        pwvm = nixpkgs.lib.nixosSystem {
-          inherit system;
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config;
-            overlays = with overlays; [ nur.overlay master unstable ];
-          };
-          specialArgs = {
-            inherit inputs username;
-          };
-          modules = [
-            ./modules/hardware/pwvm.nix
-            ./modules/nixos
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${username} = import ./modules/home-manager;
-              home-manager.extraSpecialArgs = {
-                inherit inputs username;
+            ({ pkgs, config, ... }: {
+              config = {
+                nix.settings = {
+                  # add binary caches
+                  trusted-public-keys = [
+                    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                    "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+                  ];
+                  substituters = [
+                    "https://cache.nixos.org"
+                    "https://nixpkgs-wayland.cachix.org"
+                  ];
+                };
+
+                nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
               };
-            }
+            })
           ];
         };
       };

@@ -11,7 +11,8 @@ Toggle between `dvorak` and `us` keyboard layouts with caps lock.
 - If you need full battery charge before taking the laptop to-go, run `sudo tlp fullcharge`.
 - For now `systemctl --user start docker` to enable docker on a per-run basis. I had it `enable`d in systemctl, but an upgrade broke that when the symlink changed.
 - `nix-shell -p kooha` for screen recording.
-- start `vscode` with `--ozone-platform=wayland` for now.
+- --start `vscode` with `--ozone-platform=wayland` for now.--
+  -- [vscode is broken right now](https://github.com/NixOS/nixpkgs/issues/246509) for me on wayland. Start it with `env -u WAYLAND_DISPLAY code .` to force it to use `Xwayland` for now
 
 ## TODO
 
