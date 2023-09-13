@@ -13,6 +13,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
     ironhide.url = "github:IronCoreLabs/ironhide";
+    # switch to main once flake merges
+    matui.url = "github:skeet70/matui?rev=f30a91c4f5dc0546ce980c943449ee79e46035be";
   };
 
   outputs =
@@ -55,6 +57,7 @@
               inherit (nixpkgsConfig) config;
             } // {
             ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
+            matui = inputs.matui.packages.${prev.stdenv.system}.matui;
           };
         };
       };
