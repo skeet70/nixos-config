@@ -17,6 +17,7 @@
     matui.url = "github:skeet70/matui?rev=d10be43cd90f0b0ddd82216bfef36e6ca16bb459";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+    helix.url = "github:helix-editor/helix";
   };
 
   outputs =
@@ -60,6 +61,7 @@
             } // {
             ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
             matui = inputs.matui.packages.${prev.stdenv.system}.matui;
+            helix = inputs.helix.packages.${prev.stdenv.system}.helix;
           };
         };
       };

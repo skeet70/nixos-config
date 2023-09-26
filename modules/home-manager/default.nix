@@ -7,7 +7,7 @@
 
   imports = [
     ./firefox.nix
-    ./vscode.nix
+    #./vscode.nix trying helix for now
   ];
 
   # Use sway desktop environment with Wayland display server
@@ -169,6 +169,7 @@
       cat = "bat";
       unar = "ouch decompress";
       unzip = "ouch decompress";
+      # for jdt-language-server
     };
     syntaxHighlighting.enable = true;
     enableAutosuggestions = true;
@@ -223,6 +224,36 @@
     bitwarden-cli
     blueberry
     file
+    # trying out as an alternative to vscode
+    unstable.helix
+    # helix language support
+    nodePackages.bash-language-server        # bash
+    shellcheck                               # bash
+    clang-tools                              # cpp
+    gopls                                    # go
+    haskell-language-server                  # haskell
+    nodePackages.intelephense                # php
+    # the java one still needs some work. this installs the right lsp, but helix can't see it.
+    # might see this, haven't tried env var https://dschrempf.github.io/emacs/2023-03-02-emacs-java-and-nix/
+    jdt-language-server                      # java
+    kotlin-language-server                   # kotlin
+    nil                                      # nix
+    marksman                                 # markdown
+    metals                                   # scala
+    python311Packages.python-lsp-server      # python
+    python311Packages.python-lsp-ruff        # python
+    python311Packages.pylsp-mypy             # python
+    black                                    # python
+    rust-analyzer                            # rust
+    nodePackages.svelte-language-server      # svelte
+    taplo                                    # toml
+    nodePackages.typescript-language-server  # typescript
+    nodePackages.prettier                    # typescript, js
+    vscode-langservers-extracted             # css, json, html
+    yaml-language-server                     # yaml
+    # - vscode-github-actions equivalent?
+    # - does the bash LSP give shellcheck benefits?
+    # end helix language support
     htop
     unstable.ironhide
     unstable.matui # lightweight matrix tui client
