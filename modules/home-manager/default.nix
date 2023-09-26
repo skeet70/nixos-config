@@ -58,7 +58,7 @@
     '';
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
-      #export WLR_RENDERER=vulkan
+      export WLR_RENDERER=vulkan
     '';
     extraOptions = [ "--unsupported-gpu" ];
   };
@@ -242,7 +242,7 @@
     wl-clipboard
     # vulkan-tools
     # shouldn't be necessary once the most recent version of sway hits
-    # vulkan-validation-layers
+    vulkan-validation-layers
     # end sway deps
   ];
 

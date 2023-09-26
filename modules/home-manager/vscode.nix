@@ -109,6 +109,8 @@
       "update.mode" = "none";
       "window.zoomLevel" = 1;
       "window.menuBarVisibility" = "toggle";
+      # hack to get around https://github.com/NixOS/nixpkgs/issues/246509
+      "window.titleBarStyle" = "custom";
       "terminal.integrated.shell.linux" = "${pkgs.zsh}/bin/zsh";
 
       "svelte.enable-ts-plugin" = true;
