@@ -225,7 +225,7 @@
     blueberry
     file
     htop
-    unstable.ironhide
+    unstable.ironhide # isn't building, rust version not available somehow?
     unstable.matui # lightweight matrix tui client
     nixpkgs-fmt
     ouch

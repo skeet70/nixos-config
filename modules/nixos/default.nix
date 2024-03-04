@@ -22,12 +22,16 @@
   time.timeZone = "America/Denver";
   # needed in Paris @Mariott to get stable internet
   # time.timeZone = "Europe/Paris";
+  # time.timeZone = "Australia/Perth";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.epson-escpr ];
+  };
   services.avahi.enable = true;
   services.avahi.openFirewall = true;
 
@@ -62,6 +66,7 @@
   # wayland compat xdg directives
   xdg.portal = {
     enable = true;
+    config.common.default = "*";
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
@@ -79,7 +84,7 @@
   users.extraGroups.vboxusers.members = [ "mumu" ];
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
   nix = {
     gc = {
       automatic = true;

@@ -13,9 +13,11 @@ Toggle between `dvorak` and `us` keyboard layouts with caps lock.
 - `nix-shell -p kooha` for screen recording.
 - start `vscode` with `--ozone-platform=wayland` for now. [vscode is broken right now](https://github.com/NixOS/nixpkgs/issues/246509) for me on wayland.
 - use `hx` (helix) as a vscode alternative for now.
+  - (with something selected) `*vn` to select more instances of it, then `c` to change them all. Useful when it's not a symbol recognized by the LSP.
+    - (with something selected) `*%s` then enter to select all in doc of something hovered
+  - `,` to collapse multiple cursors
+  - `%s` to search+select all occurrences of something typed in the doc
 
 ## TODO
 
 - try https://github.com/uowuo/abaddon
-- fix move workspace freeze
-- try moving from vscode to helix (once https://github.com/helix-editor/helix/pull/2507 and https://github.com/helix-editor/helix/pull/5768) are merged, or off the flake in the ts branch if you get impatient
