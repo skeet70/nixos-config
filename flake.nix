@@ -7,7 +7,6 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -47,12 +46,6 @@
 
       overlays = {
         # Overlays to add different versions `nixpkgs` into package set
-        master = _: prev: {
-          master = import nixpkgs {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          };
-        };
         unstable = _: prev: {
           unstable = import nixpkgs-unstable
             {
@@ -75,7 +68,6 @@
             inherit (nixpkgsConfig) config;
             overlays = with overlays; [
               nur.overlay
-              master
               unstable
             ];
           };
