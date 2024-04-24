@@ -67,6 +67,7 @@
 
   programs.waybar = {
     enable = true;
+    package = pkgs.unstable.waybar.override { upowerSupport = false; };
     settings = {
       mainBar = {
         layer = "bottom";

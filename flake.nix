@@ -14,7 +14,7 @@
     ironhide.url = "github:IronCoreLabs/ironhide";
     matui.url = "github:pkulak/matui";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs-unstable";
     helix.url = "github:helix-editor/helix";
   };
 

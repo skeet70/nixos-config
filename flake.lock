@@ -356,15 +356,15 @@
         "lib-aggregate": "lib-aggregate",
         "nix-eval-jobs": "nix-eval-jobs",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1713968189,
-        "narHash": "sha256-uwlP3fiLSGssO7x6sYSdeQ8Q0WwLRrMHSpQhZ0/wmy0=",
+        "lastModified": 1713978995,
+        "narHash": "sha256-eqAZRB3a7wf44Ek+g4c22CjkhFUcypmWCRyDkKZM328=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "7f02686ac67c0f02d9ff8d28cbe56146e8dc82a7",
+        "rev": "e5f9ab26aa52ae7aee95b479652b54e2e5248da0",
         "type": "github"
       },
       "original": {
