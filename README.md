@@ -17,6 +17,8 @@ Toggle between `dvorak` and `us` keyboard layouts with caps lock.
     - (with something selected) `*%s` then enter to select all in doc of something hovered
   - `,` to collapse multiple cursors
   - `%s` to search+select all occurrences of something typed in the doc
+- start `brave` with `NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:nix-community/nixGL -- brave` for now so hardware acceleration works
+  - prefer firefox but was having memory-leaky problems and meet issues as of 04/03/24
 
 ## TODO
 

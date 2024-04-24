@@ -6,6 +6,7 @@
   home.stateVersion = "22.05";
 
   imports = [
+    ./brave.nix
     ./firefox.nix
     ./helix.nix
   ];
@@ -56,9 +57,10 @@
     extraConfig = ''
       bindsym ${config.wayland.windowManager.sway.config.modifier}+Shift+x move workspace to output right
     '';
+    # vulkan fallbacks are for https://github.com/nix-community/home-manager/issues/5311
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
-      export WLR_RENDERER=vulkan
+      export WLR_RENDERER=vulkan,gles2,pixman
     '';
     extraOptions = [ "--unsupported-gpu" ];
   };
@@ -159,6 +161,7 @@
       init.defaultBranch = "main";
       color.ui = true;
       pull.rebase = true;
+      "branch \"main\"".pushRemote = "no_push";
     };
   };
 
@@ -171,8 +174,8 @@
       unzip = "ouch decompress";
       # for jdt-language-server
     };
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    enableAutosuggestions = true;
     enableCompletion = true;
     enableVteIntegration = true;
     history = {
@@ -225,7 +228,7 @@
     blueberry
     file
     htop
-    unstable.ironhide # isn't building, rust version not available somehow?
+    unstable.ironhide
     unstable.matui # lightweight matrix tui client
     nixpkgs-fmt
     ouch

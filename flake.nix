@@ -12,8 +12,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
     ironhide.url = "github:IronCoreLabs/ironhide";
-    # switch to main once flake merges
-    matui.url = "github:skeet70/matui?rev=d10be43cd90f0b0ddd82216bfef36e6ca16bb459";
+    matui.url = "github:pkulak/matui";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
     helix.url = "github:helix-editor/helix";
