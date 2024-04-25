@@ -1,8 +1,11 @@
-{ config, pkgs, lib, ... }:
-{
+{ config
+, pkgs
+, lib
+, ...
+}: {
   programs.helix = {
     enable = true;
-    package = pkgs.unstable.helix;
+    package = pkgs.helix;
     defaultEditor = true;
     settings = {
       theme = "jellybeans";
@@ -74,7 +77,7 @@
         #     },
         #     format = {  enable = false  }
         #   }
-        # } 
+        # }
         {
           name = "yaml";
           file-types = [ "yaml" "yml" ];
@@ -135,9 +138,9 @@
     nodePackages.prettier # typescript, js
     vscode-langservers-extracted # css, json, html
     yaml-language-server # yaml
-    # - vscode-github-actions equivalent? 
+    # - vscode-github-actions equivalent?
     #   - see https://github.com/helix-editor/helix/issues/6988
-    #   - see https://github.com/actions/languageservices/issues/56    
+    #   - see https://github.com/actions/languageservices/issues/56
     # end helix language support
   ];
 }

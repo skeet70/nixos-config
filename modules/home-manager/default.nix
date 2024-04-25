@@ -1,5 +1,8 @@
-{ inputs, config, lib, pkgs, ... }: {
-
+{ config
+, lib
+, pkgs
+, ...
+}: {
   programs.home-manager = {
     enable = true;
   };
@@ -20,14 +23,19 @@
       menu = "bemenu-run --no-overlap";
       modifier = "Mod4";
       startup = [
-        { command = "${pkgs.autotiling-rs}/bin/autotiling-rs"; always = true; }
+        {
+          command = "${pkgs.autotiling-rs}/bin/autotiling-rs";
+          always = true;
+        }
       ];
       # Status bar(s)
-      bars = [{
-        fonts.size = 13.0;
-        command = "waybar"; # You can change it if you want
-        position = "top";
-      }];
+      bars = [
+        {
+          fonts.size = 13.0;
+          command = "waybar"; # You can change it if you want
+          position = "top";
+        }
+      ];
       # Display device configuration
       output = {
         eDP-1 = {
@@ -67,7 +75,7 @@
 
   programs.waybar = {
     enable = true;
-    package = pkgs.unstable.waybar.override { upowerSupport = false; };
+    package = pkgs.waybar.override { upowerSupport = true; };
     settings = {
       mainBar = {
         layer = "bottom";
@@ -229,8 +237,8 @@
     blueberry
     file
     htop
-    unstable.ironhide
-    unstable.matui # lightweight matrix tui client
+    ironhide
+    matui # lightweight matrix tui client
     nixpkgs-fmt
     ouch
     pavucontrol
@@ -276,9 +284,18 @@
     {
       enable = true;
       events = [
-        { event = "before-sleep"; command = lockCommand; }
-        { event = "after-resume"; command = ''${swayMsgPath} "output * dpms on"''; }
-        { event = "lock"; command = lockCommand; }
+        {
+          event = "before-sleep";
+          command = lockCommand;
+        }
+        {
+          event = "after-resume";
+          command = ''${swayMsgPath} "output * dpms on"'';
+        }
+        {
+          event = "lock";
+          command = lockCommand;
+        }
       ];
       timeouts = [
         {

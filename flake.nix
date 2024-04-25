@@ -19,10 +19,10 @@
   };
 
   outputs =
-    inputs@{ self
-    , nixpkgs
+    inputs @ { self
     , nixpkgs-unstable
     , home-manager
+    , nixpkgs-wayland
     , nur
     , ...
     }:
@@ -42,32 +42,22 @@
           permittedInsecurePackages = [ "nodejs-16.20.0" ];
         };
       };
-
-      overlays = {
-        # Overlays to add different versions `nixpkgs` into package set
-        unstable = _: prev: {
-          unstable = import nixpkgs-unstable
-            {
-              inherit (prev.stdenv) system;
-              inherit (nixpkgsConfig) config;
-            } // {
-            ironhide = inputs.ironhide.packages.${prev.stdenv.system}.ironhide;
-            matui = inputs.matui.packages.${prev.stdenv.system}.matui;
-            helix = inputs.helix.packages.${prev.stdenv.system}.helix;
-          };
-        };
-      };
     in
     {
       nixosConfigurations = {
-        murph-icl-gen2 = nixpkgs.lib.nixosSystem {
+        murph-icl-gen2 = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
-          pkgs = import nixpkgs {
+          pkgs = import nixpkgs-unstable {
             system = "x86_64-linux";
             inherit (nixpkgsConfig) config;
-            overlays = with overlays; [
+            overlays = [
               nur.overlay
-              unstable
+              nixpkgs-wayland.overlay
+              (final: prev: {
+                inherit (inputs.ironhide.packages.${prev.stdenv.system}) ironhide;
+                inherit (inputs.matui.packages.${prev.stdenv.system}) matui;
+                inherit (inputs.helix.packages.${prev.stdenv.system}) helix;
+              })
             ];
           };
           specialArgs = {
@@ -86,7 +76,10 @@
                 inherit inputs username;
               };
             }
-            ({ pkgs, config, ... }: {
+            ({ pkgs
+             , config
+             , ...
+             }: {
               config = {
                 nix.settings = {
                   # add binary caches
@@ -99,8 +92,6 @@
                     "https://nixpkgs-wayland.cachix.org"
                   ];
                 };
-
-                nixpkgs.overlays = [ inputs.nixpkgs-wayland.overlay ];
               };
             })
           ];
