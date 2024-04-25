@@ -1,8 +1,12 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.helix = {
     enable = true;
-    package = pkgs.unstable.helix;
+    package = pkgs.helix;
     defaultEditor = true;
     settings = {
       theme = "jellybeans";
@@ -21,7 +25,7 @@
           name = "javascript";
           formatter = {
             command = "prettier";
-            args = [ "--parser" "typescript" ];
+            args = ["--parser" "typescript"];
           };
           auto-format = true;
         }
@@ -29,7 +33,7 @@
           name = "typescript";
           formatter = {
             command = "prettier";
-            args = [ "--parser" "typescript" ];
+            args = ["--parser" "typescript"];
           };
           auto-format = true;
         }
@@ -37,7 +41,7 @@
           name = "python";
           formatter = {
             command = "black";
-            args = [ "--quiet" "-" ];
+            args = ["--quiet" "-"];
           };
           auto-format = true;
         }
@@ -74,11 +78,11 @@
         #     },
         #     format = {  enable = false  }
         #   }
-        # } 
+        # }
         {
           name = "yaml";
-          file-types = [ "yaml" "yml" ];
-          language-servers = [ "yaml-language-server" ];
+          file-types = ["yaml" "yml"];
+          language-servers = ["yaml-language-server"];
         }
       ];
       language-server = {
@@ -135,9 +139,9 @@
     nodePackages.prettier # typescript, js
     vscode-langservers-extracted # css, json, html
     yaml-language-server # yaml
-    # - vscode-github-actions equivalent? 
+    # - vscode-github-actions equivalent?
     #   - see https://github.com/helix-editor/helix/issues/6988
-    #   - see https://github.com/actions/languageservices/issues/56    
+    #   - see https://github.com/actions/languageservices/issues/56
     # end helix language support
   ];
 }
