@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
   programs.helix = {
     enable = true;
@@ -25,7 +24,7 @@
           name = "javascript";
           formatter = {
             command = "prettier";
-            args = ["--parser" "typescript"];
+            args = [ "--parser" "typescript" ];
           };
           auto-format = true;
         }
@@ -33,7 +32,7 @@
           name = "typescript";
           formatter = {
             command = "prettier";
-            args = ["--parser" "typescript"];
+            args = [ "--parser" "typescript" ];
           };
           auto-format = true;
         }
@@ -41,7 +40,7 @@
           name = "python";
           formatter = {
             command = "black";
-            args = ["--quiet" "-"];
+            args = [ "--quiet" "-" ];
           };
           auto-format = true;
         }
@@ -81,8 +80,8 @@
         # }
         {
           name = "yaml";
-          file-types = ["yaml" "yml"];
-          language-servers = ["yaml-language-server"];
+          file-types = [ "yaml" "yml" ];
+          language-servers = [ "yaml-language-server" ];
         }
       ];
       language-server = {

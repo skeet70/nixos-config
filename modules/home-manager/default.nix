@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
   programs.home-manager = {
     enable = true;
@@ -71,18 +70,18 @@
       export WLR_NO_HARDWARE_CURSORS=1
       export WLR_RENDERER=vulkan,gles2,pixman
     '';
-    extraOptions = ["--unsupported-gpu"];
+    extraOptions = [ "--unsupported-gpu" ];
   };
 
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar.override {upowerSupport = true;};
+    package = pkgs.waybar.override { upowerSupport = true; };
     settings = {
       mainBar = {
         layer = "bottom";
-        modules-left = ["sway/workspaces" "sway/mode"];
-        modules-center = ["sway/window"];
-        modules-right = ["pulseaudio" "bluetooth" "network" "cpu" "memory" "temperature" "sway/language" "battery" "clock" "tray"];
+        modules-left = [ "sway/workspaces" "sway/mode" ];
+        modules-center = [ "sway/window" ];
+        modules-right = [ "pulseaudio" "bluetooth" "network" "cpu" "memory" "temperature" "sway/language" "battery" "clock" "tray" ];
         "sway/mode".format = "<span style=\"italic\">{}</span>";
         tray.spacing = 10;
         clock = {
@@ -97,7 +96,7 @@
         temperature = {
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
-          format-icons = ["" "" ""];
+          format-icons = [ "" "" "" ];
         };
         battery = {
           states = {
@@ -109,7 +108,7 @@
           format-charging = "{capacity}% ";
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [ "" "" "" "" "" ];
         };
         network = {
           format-wifi = "{essid} ({signalStrength}%) ";
@@ -133,7 +132,7 @@
             phone = "";
             portable = "";
             car = "";
-            default = ["" "" ""];
+            default = [ "" "" "" ];
           };
           on-click = "pavucontrol";
         };
@@ -220,7 +219,7 @@
     enable = true;
     compression = true;
     controlMaster = "auto";
-    includes = ["*.conf"];
+    includes = [ "*.conf" ];
     # matchBlocks."*" =
     #   {
     #     identityFile = "~/.ssh/yubikey.pub";
@@ -277,39 +276,41 @@
     defaultTimeout = 5000;
   };
 
-  services.swayidle = let
-    lockCommand = pkgs.swaylock + "/bin/swaylock -fF -c 000000";
-    swayMsgPath = config.wayland.windowManager.sway.package + /bin/swaymsg;
-  in {
-    enable = true;
-    events = [
-      {
-        event = "before-sleep";
-        command = lockCommand;
-      }
-      {
-        event = "after-resume";
-        command = ''${swayMsgPath} "output * dpms on"'';
-      }
-      {
-        event = "lock";
-        command = lockCommand;
-      }
-    ];
-    timeouts = [
-      {
-        timeout = 60 * 6;
-        command = "${swayMsgPath} \"output * dpms off\"";
-        resumeCommand = "${swayMsgPath} \"output * dpms on\"";
-      }
-      {
-        timeout = 60 * 10;
-        command = lockCommand;
-      }
-      {
-        timeout = 60 * 15;
-        command = "systemctl suspend";
-      }
-    ];
-  };
+  services.swayidle =
+    let
+      lockCommand = pkgs.swaylock + "/bin/swaylock -fF -c 000000";
+      swayMsgPath = config.wayland.windowManager.sway.package + /bin/swaymsg;
+    in
+    {
+      enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = lockCommand;
+        }
+        {
+          event = "after-resume";
+          command = ''${swayMsgPath} "output * dpms on"'';
+        }
+        {
+          event = "lock";
+          command = lockCommand;
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 60 * 6;
+          command = "${swayMsgPath} \"output * dpms off\"";
+          resumeCommand = "${swayMsgPath} \"output * dpms on\"";
+        }
+        {
+          timeout = 60 * 10;
+          command = lockCommand;
+        }
+        {
+          timeout = 60 * 15;
+          command = "systemctl suspend";
+        }
+      ];
+    };
 }
