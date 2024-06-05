@@ -22,4 +22,4 @@ Toggle between `dvorak` and `us` keyboard layouts with caps lock.
 
 ## TODO
 
-- try https://github.com/uowuo/abaddon
+- hardware acceleration stopped working in brave even in `nixGL`

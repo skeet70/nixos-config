@@ -231,6 +231,7 @@
   };
 
   home.packages = with pkgs; [
+    abaddon
     autotiling-rs
     bitwarden
     bitwarden-cli
